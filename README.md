@@ -15,7 +15,9 @@ docker run -i --name zig_dev_con zig_dev_img
 # control c to end process
 docker start zig_dev_con
 ```
-then go into the devcontainers menu and "attach to running container" and choose zig_dev_con
+then go into the devcontainers menu and "attach to running container" and choose zig_dev_con.
+
+Then I can edit the code from my linux window or my windows window.
 
 # Dependencies
 1. [Zig](https://ziglang.org/) (for compilation)
