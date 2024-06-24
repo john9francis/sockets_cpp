@@ -10,3 +10,4 @@ This project was developed on a windows machine. The Dockerfile and .devcontaine
 
 # Useful Websites
 - [Zig platforms](https://ziglang.org/download/0.11.0/release-notes.html#Support-Table)
+- [Detecting OS from C code](https://iq.opengenus.org/detect-operating-system-in-c/)

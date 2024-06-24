@@ -1,6 +1,12 @@
 #include <iostream>
 
 int main(){
-  std::cout << "Hello Socket World" << std::endl;
+  #ifdef _WIN32
+  std::cout << "Hello WIN32 World" << std::endl;
+  #endif 
+  #ifdef __linux__
+  std::cout << "Hello Linux World" << std::endl;
+  #endif
+
 
 }
