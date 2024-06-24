@@ -6,6 +6,11 @@ This project was developed on a windows machine. The Dockerfile and .devcontaine
 
 zig version: 0.11.0
 
+Docker build process:
+```
+
+```
+
 # Dependencies
 1. [Zig](https://ziglang.org/) (for compilation)
 2. [Make]() (optional: simply holds the build scripts, but they can be entered by hand.)

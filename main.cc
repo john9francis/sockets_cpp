@@ -1,8 +1,11 @@
 #include <iostream>
 
 #include <sys/types.h>
+
+#ifdef __linux__
 #include <sys/socket.h>
 #include <netdb.h>
+#endif
 
 #include "server_lin.hh"
 
