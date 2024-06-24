@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include "server_lin.hh"
+
 int main(){
   #ifdef _WIN32
   std::cout << "Hello WIN32 World" << std::endl;

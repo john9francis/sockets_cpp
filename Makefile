@@ -1,9 +1,14 @@
+SRC_DIR = src
+INCLUDE_DIR = include
+
+SOURCES = $(wildcard $(SRC_DIR)/*.cc)
+
 all: linux windows
 
 linux:
-	zig c++ --target=x86_64-linux main.cc -o lin/main
+	zig c++ --target=x86_64-linux main.cc $(SOURCES) -I$(INCLUDE_DIR) -o lin/main
 
 windows:
-	zig c++ --target=x86_64-windows main.cc -o win/main.exe
+	zig c++ --target=x86_64-windows main.cc $(SOURCES) -I$(INCLUDE_DIR) -o win/main.exe
 
-.PHONY: windows linux
+.PHONY: windows linux all
