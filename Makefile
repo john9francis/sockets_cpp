@@ -1,3 +1,5 @@
+all:
+	@echo Please specify target: linux or windows
 
 linux:
 	zig c++ --target=x86_64-linux main.cc -o lin/main
