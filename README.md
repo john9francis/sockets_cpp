@@ -12,4 +12,5 @@ zig version: 0.11.0
 
 # Useful Websites
 - [Zig platforms](https://ziglang.org/download/0.11.0/release-notes.html#Support-Table)
+- [Install zig linux](https://github.com/ziglang/zig/wiki/Install-Zig-from-a-Package-Manager)
 - [Detecting OS from C code](https://iq.opengenus.org/detect-operating-system-in-c/)
