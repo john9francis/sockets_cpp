@@ -14,3 +14,4 @@ zig version: 0.11.0
 - [Zig platforms](https://ziglang.org/download/0.11.0/release-notes.html#Support-Table)
 - [Install zig linux](https://github.com/ziglang/zig/wiki/Install-Zig-from-a-Package-Manager)
 - [Detecting OS from C code](https://iq.opengenus.org/detect-operating-system-in-c/)
+- [Beej's networking tutorial](https://beej.us/guide/bgnet/html/split/system-calls-or-bust.html#getaddrinfoprepare-to-launch)
