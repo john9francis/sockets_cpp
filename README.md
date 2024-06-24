@@ -6,10 +6,16 @@ This project was developed on a windows machine. The Dockerfile and .devcontaine
 
 zig version: 0.11.0
 
-Docker build process:
+# Docker build process:
+Sort of messy way to start up the container:
 ```
-
+docker rm zig_dev_con 
+docker build -t zig_dev_img .
+docker run -i --name zig_dev_con zig_dev_img
+# control c to end process
+docker start zig_dev_con
 ```
+then go into the devcontainers menu and "attach to running container" and choose zig_dev_con
 
 # Dependencies
 1. [Zig](https://ziglang.org/) (for compilation)
