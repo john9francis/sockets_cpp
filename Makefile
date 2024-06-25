@@ -11,4 +11,8 @@ linux:
 windows:
 	zig c++ --target=x86_64-windows main.cc $(SOURCES) -I$(INCLUDE_DIR) -o win/main.exe
 
-.PHONY: windows linux all
+.PHONY: windows linux all gnulinux
+
+
+gnulinux:
+	g++ main.cc $(SOURCES) -I$(INCLUDE_DIR) -o lin/main
