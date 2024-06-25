@@ -1,6 +1,8 @@
 FROM alpine:latest
 
 RUN apk add zig git make
+# RUN apk add --no-cache musl-dev
+RUN apk add --no-cache g++
 
 WORKDIR /home/sockets_cpp/
 
