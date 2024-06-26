@@ -1,8 +1,10 @@
-FROM alpine:latest
+FROM ubuntu:latest
 
-RUN apk add zig git make
-# RUN apk add --no-cache musl-dev
-RUN apk add --no-cache gcc g++
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    make \
+    git
 
 WORKDIR /home/sockets_cpp/
 
