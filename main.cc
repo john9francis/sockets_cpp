@@ -50,6 +50,9 @@ int main(){
     << std::endl;
 
 
+  listen(sock, 10);
+
+
   #endif
 
 }
