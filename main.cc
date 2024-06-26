@@ -19,7 +19,7 @@ int main(){
   
   int status;
   struct addrinfo hints;
-  struct addrinfo* servinfo;
+  struct addrinfo* res;
 
   memset(&hints, 0, sizeof hints);
 
@@ -27,13 +27,31 @@ int main(){
   hints.ai_socktype = SOCK_STREAM;
   hints.ai_flags = AI_PASSIVE;
 
-  if ((status = getaddrinfo(NULL, "8080", &hints, &servinfo)) != 0){
+  if ((status = getaddrinfo(NULL, "8080", &hints, &res)) != 0){
     fprintf(stderr, "getaddrinfo error: %s\n", gai_strerror(status));
     exit(1);
   }
   
-  std::cout << "Created addrinfo" << std::endl;
-  #endif
 
+  int s;
+  s = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
+  if (s == -1){
+    fprintf(stderr, "Socket initialization error");
+    exit(1);
+  }
+
+  int code = bind(s, res->ai_addr, res->ai_addrlen);
+
+  std::cout
+    << "Bound socket: "
+    << s
+    << " to: "
+    << res->ai_addr
+    << " with code: "
+    << code
+    << std::endl;
+
+
+  #endif
 
 }

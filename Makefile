@@ -3,7 +3,7 @@ INCLUDE_DIR = include
 
 SOURCES = $(wildcard $(SRC_DIR)/*.cc)
 
-all: linux windows
+all: gnulinux
 
 linux:
 	zig c++ --target=x86_64-linux main.cc $(SOURCES) -I$(INCLUDE_DIR) -o lin/main
@@ -16,3 +16,4 @@ windows:
 
 gnulinux:
 	g++ main.cc $(SOURCES) -I$(INCLUDE_DIR) -o lin/main
+	./lin/main
