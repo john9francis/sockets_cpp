@@ -36,11 +36,14 @@ int main(){
   int s;
   s = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
   if (s == -1){
-    fprintf(stderr, "Socket initialization error");
+    std::cerr << "Could not initialize socket." << std::endl;
     exit(1);
   }
 
   int code = bind(s, res->ai_addr, res->ai_addrlen);
+  if (code != 0){
+    std::cerr << "Could not bind the socket." << std::endl;
+  }
 
   std::cout
     << "Bound socket: "
