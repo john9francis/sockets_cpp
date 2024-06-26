@@ -18,6 +18,7 @@ int main(){
   std::cout << "Hello Linux World" << std::endl;
   
   int status;
+  int sock;
   struct addrinfo hints;
   struct addrinfo* res;
 
@@ -31,27 +32,21 @@ int main(){
     fprintf(stderr, "getaddrinfo error: %s\n", gai_strerror(status));
     exit(1);
   }
-  
 
-  int s;
-  s = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
-  if (s == -1){
+  if ((sock = socket(res->ai_family, res->ai_socktype, res->ai_protocol)) == -1){
     std::cerr << "Could not initialize socket." << std::endl;
     exit(1);
   }
-
-  int code = bind(s, res->ai_addr, res->ai_addrlen);
-  if (code != 0){
-    std::cerr << "Could not bind the socket." << std::endl;
+  
+  if ((status = bind(sock, res->ai_addr, res->ai_addrlen)) != 0){
+    fprintf(stderr, "bind error: %s\n", gai_strerror(status));
   }
 
   std::cout
     << "Bound socket: "
-    << s
-    << " to: "
-    << res->ai_addr
+    << sock
     << " with code: "
-    << code
+    << status
     << std::endl;
 
 
