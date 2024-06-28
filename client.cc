@@ -8,6 +8,8 @@
 #include <netdb.h>
 #endif
 
+#include <string>
+
 #include "server_lin.hh"
 
 #define MYPORT "8080"
@@ -62,11 +64,12 @@ int main(){
   std::cout << response << std::endl;
 
   // send a message over
-  char* msg = "Hey!";
+  std::string strmsg = "Hey!";
+  const char* msg = strmsg.c_str();
   int len, bytes_sent;
 
   len = strlen(msg);
-  bytes_sent = send(new_sock, msg, len, 0);
+  bytes_sent = send(new_sock, &strmsg, len, 0);
 
   if (bytes_sent != len){
     std::cout << "The whole message wasn't quite sent!" << std::endl;
