@@ -19,6 +19,11 @@ then go into the devcontainers menu and "attach to running container" and choose
 
 Then I can edit the code from my linux window or my windows window.
 
+
+# TODO:
+- [x] Got the server and client sending messages to eachother (on linux so far)
+- [ ] Get them sending strings to eachother and decoding them properly
+
 # Dependencies
 1. [Zig](https://ziglang.org/) (for compilation)
 2. [Make]() (optional: simply holds the build scripts, but they can be entered by hand.)
