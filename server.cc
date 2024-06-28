@@ -23,14 +23,14 @@ int main(){
   std::cout << "Hello Linux World" << std::endl;
   
   int status;
-  int sock;
+  int serverSocket;
   struct addrinfo hints;
   struct addrinfo* res;
 
   struct sockaddr_storage their_addr;
   socklen_t addr_size;
 
-  int new_sock;
+  int clientSocket;
 
   memset(&hints, 0, sizeof hints);
 
@@ -43,36 +43,36 @@ int main(){
     exit(1);
   }
 
-  if ((sock = socket(res->ai_family, res->ai_socktype, res->ai_protocol)) == -1){
+  if ((serverSocket = socket(res->ai_family, res->ai_socktype, res->ai_protocol)) == -1){
     std::cerr << "Could not initialize socket." << std::endl;
     exit(1);
   }
   
-  if ((status = bind(sock, res->ai_addr, res->ai_addrlen)) != 0){
+  if ((status = bind(serverSocket, res->ai_addr, res->ai_addrlen)) != 0){
     fprintf(stderr, "bind error: %s\n", gai_strerror(status));
   }
 
   std::cout
     << "Bound socket: "
-    << sock
+    << serverSocket
     << " with code: "
     << status
     << std::endl;
 
 
   std::cout << "Listening on port: " << MYPORT << std::endl;
-  listen(sock, BACKLOG);
+  listen(serverSocket, BACKLOG);
 
   addr_size = sizeof their_addr;
-  new_sock = accept(sock, (struct sockaddr*)&their_addr, &addr_size);
+  clientSocket = accept(serverSocket, (struct sockaddr*)&their_addr, &addr_size);
 
   // send a message over
-  std::string strmsg = "Hey!";
+  std::string strmsg = "Server says Hey!";
   const char* msg = strmsg.c_str();
   int len, bytes_sent;
 
   len = strlen(msg);
-  bytes_sent = send(new_sock, msg, len, 0);
+  bytes_sent = send(clientSocket, "Hey from server", len, 0);
 
   if (bytes_sent != len){
     std::cout << "The whole message wasn't quite sent!" << std::endl;
@@ -81,12 +81,12 @@ int main(){
     std::cout << "Sent message" << std::endl;
   }
 
-  char* response[100];
+  char* response[100] = {0};
 
   int bytes_recieved = -1;
 
   while (bytes_recieved <= 0){
-    bytes_recieved = recv(new_sock, response, 100, 0);
+    bytes_recieved = recv(clientSocket, response, sizeof(response), 0);
   }
 
   std::cout << response << std::endl;

@@ -23,14 +23,14 @@ int main(){
   std::cout << "Hello Linux World" << std::endl;
   
   int status;
-  int sock;
+  int serverSocket;
   struct addrinfo hints;
   struct addrinfo* res;
 
   struct sockaddr_storage their_addr;
   socklen_t addr_size;
 
-  int new_sock;
+  int clientSocket;
 
   memset(&hints, 0, sizeof hints);
 
@@ -43,33 +43,33 @@ int main(){
     exit(1);
   }
 
-  if ((sock = socket(res->ai_family, res->ai_socktype, res->ai_protocol)) == -1){
+  if ((serverSocket = socket(res->ai_family, res->ai_socktype, res->ai_protocol)) == -1){
     std::cerr << "Could not initialize socket." << std::endl;
     exit(1);
   }
 
-  status = connect(sock, res->ai_addr, res->ai_addrlen);
+  status = connect(serverSocket, res->ai_addr, res->ai_addrlen);
 
   std::cout
     << "Bound socket: "
-    << sock
+    << serverSocket
     << " with code: "
     << status
     << std::endl;
 
   char* response[100];
 
-  recv(new_sock, response, 100, 0);
+  recv(clientSocket, response, 100, 0);
 
   std::cout << "From server: " << response << std::endl;
 
   // send a message over
-  std::string strmsg = "Hey!";
+  std::string strmsg = "Client says hi!";
   const char* msg = strmsg.c_str();
   int len, bytes_sent;
 
   len = strlen(msg);
-  bytes_sent = send(sock, &strmsg, len, 0);
+  bytes_sent = send(serverSocket, "Hi from client", len, 0);
 
   if (bytes_sent != len){
     std::cout << "The whole message wasn't quite sent!" << std::endl;
