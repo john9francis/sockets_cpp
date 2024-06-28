@@ -17,3 +17,9 @@ windows:
 gnulinux:
 	g++ main.cc $(SOURCES) -I$(INCLUDE_DIR) -o lin/main
 	./lin/main
+
+server:
+	g++ server.cc $(SOURCES) -I$(INCLUDE_DIR) -o lin/server
+
+client:
+	g++ client.cc $(SOURCES) -I$(INCLUDE_DIR) -o lin/client
