@@ -27,7 +27,7 @@ client:
 	g++ client.cc $(SOURCES) -I$(INCLUDE_DIR) -o lin/client
 
 wserver:
-	g++ server.cc $(SOURCES) -I$(INCLUDE_DIR) -o win/server
+	g++ server.cc $(SOURCES) -I$(INCLUDE_DIR) -o win/server -lws2_32
 
 wclient:
-	g++ client.cc $(SOURCES) -I$(INCLUDE_DIR) -o win/client
+	g++ client.cc $(SOURCES) -I$(INCLUDE_DIR) -o win/client -lws2_32
