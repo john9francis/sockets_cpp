@@ -77,14 +77,19 @@ int main(){
   if (bytes_sent != len){
     std::cout << "The whole message wasn't quite sent!" << std::endl;
   }
+  else {
+    std::cout << "Sent message" << std::endl;
+  }
 
   char* response[100];
 
-  recv(new_sock, response, 100, 0);
+  int bytes_recieved = -1;
 
+  while (bytes_recieved <= 0){
+    bytes_recieved = recv(new_sock, response, 100, 0);
+  }
 
   std::cout << response << std::endl;
-
 
   #endif
 

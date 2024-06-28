@@ -61,7 +61,7 @@ int main(){
 
   recv(new_sock, response, 100, 0);
 
-  std::cout << response << std::endl;
+  std::cout << "From server: " << response << std::endl;
 
   // send a message over
   std::string strmsg = "Hey!";
@@ -69,7 +69,7 @@ int main(){
   int len, bytes_sent;
 
   len = strlen(msg);
-  bytes_sent = send(new_sock, &strmsg, len, 0);
+  bytes_sent = send(sock, &strmsg, len, 0);
 
   if (bytes_sent != len){
     std::cout << "The whole message wasn't quite sent!" << std::endl;
