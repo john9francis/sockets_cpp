@@ -61,6 +61,17 @@ int server(){
   std::cout << "Bound socket successfully" << std::endl;
   freeaddrinfo(res);
 
+  std::cout << "Listening..." << std::endl;
+
+  // if (listen(listenSocket, 100) == -1){
+  //   std::cout << "Listen error: " << WSAGetLastError() << std::endl;
+  //   closesocket(listenSocket);
+  //   WSACleanup();
+  //   return 1;
+  // }
+
+  listen(listenSocket, 100);
+
   return 0;
 }
 } // !WindowsSockets
