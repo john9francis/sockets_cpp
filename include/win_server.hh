@@ -72,6 +72,19 @@ int server(){
 
   listen(listenSocket, 100);
 
+  SOCKET clientSocket = INVALID_SOCKET;
+
+  clientSocket = accept(listenSocket, NULL, NULL);
+
+  if (clientSocket == INVALID_SOCKET){
+    std::cout << "Accept failed: " << WSAGetLastError() << std::endl;
+    closesocket(listenSocket);
+    WSACleanup();
+    return 1; 
+  }
+
+  std::cout << "client connected" << std::endl;
+
   return 0;
 }
 } // !WindowsSockets
