@@ -1,12 +1,12 @@
 #ifdef _WIN32
-// put windows header here
+#include "win_client.hh"
 #else
 #include "lin_client.hh"
 #endif
 
 int main(){
   #ifdef _WIN32
-  // windows function
+  WindowsSockets::client();
   #else
   LinuxSockets::client();
   #endif
