@@ -1,5 +1,5 @@
 # sockets_cpp
-A simple communication over the network using sockets in C++
+A simple communication over the network using sockets in C++. For this project, I will create a server that listens for connections. Then the server can periodically send the client information and the client will send back a message saying if it received the message or not.
 
 # Development Environment
 This project was developed on a windows machine. The Dockerfile and .devcontainer allow me to create a linux environment for testing if this works on linux. Also zig allows me to cross compile for linux on my windows machine.
@@ -22,11 +22,12 @@ Then I can edit the code from my linux window or my windows window.
 
 # TODO:
 - [x] Got the server and client sending messages to eachother (on linux so far)
-- [ ] Get them sending strings to eachother and decoding them properly
+- [x] Get them sending strings to eachother and decoding them properly
 
 # Dependencies
-1. [Zig](https://ziglang.org/) (for compilation)
-2. [Make]() (optional: simply holds the build scripts, but they can be entered by hand.)
+1. [Zig](https://ziglang.org/) (for cross compilation)
+2. gcc and g++ for compilation in a devcontainer
+3. [Make]() (optional: simply holds the build scripts, but they can be entered by hand.)
 
 # Useful Websites
 - [Zig platforms](https://ziglang.org/download/0.11.0/release-notes.html#Support-Table)

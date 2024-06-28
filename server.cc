@@ -49,7 +49,8 @@ int main(){
   }
   
   if ((status = bind(serverSocket, res->ai_addr, res->ai_addrlen)) != 0){
-    fprintf(stderr, "bind error: %s\n", gai_strerror(status));
+    std::cerr << "Could not bind socket: " << status << std::endl;
+    exit(1);
   }
 
   std::cout
@@ -61,10 +62,15 @@ int main(){
 
 
   std::cout << "Listening on port: " << MYPORT << std::endl;
-  listen(serverSocket, BACKLOG);
+  listen(serverSocket, BACKLOG); // pauses execution until a connection
 
   addr_size = sizeof their_addr;
   clientSocket = accept(serverSocket, (struct sockaddr*)&their_addr, &addr_size);
+
+  std::cout 
+  << "Accepted socket: "
+  << clientSocket
+  << std::endl;
 
   // send a message over
   std::string strmsg = "Server says Hey!";
