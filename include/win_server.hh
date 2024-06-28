@@ -38,6 +38,18 @@ int server(){
 
   std::cout << "get addr info succeeded" << std::endl;
 
+  SOCKET listenSocket = INVALID_SOCKET;
+  listenSocket = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
+  if (listenSocket == INVALID_SOCKET){
+    std::cout << "Error creating listen socket!" << std::endl;
+    freeaddrinfo(res);
+    WSACleanup();
+    return 1;
+  }
+
+  std::cout << "listen socket created" << std::endl;
+
+
   return 0;
 }
 } // !WindowsSockets
