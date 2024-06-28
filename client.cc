@@ -57,9 +57,13 @@ int main(){
     << status
     << std::endl;
 
-  char* response[100];
+  char response[1024];
 
-  recv(clientSocket, response, 100, 0);
+  int bytesReceived = -1;
+  
+  while (bytesReceived <= 0){
+    bytesReceived = recv(serverSocket, response, sizeof(response), 0);
+  }
 
   std::cout << "From server: " << response << std::endl;
 

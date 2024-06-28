@@ -81,7 +81,7 @@ int main(){
     std::cout << "Sent message" << std::endl;
   }
 
-  char* response[100] = {0};
+  char response[1024] = {0};
 
   int bytes_recieved = -1;
 
