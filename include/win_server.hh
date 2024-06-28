@@ -41,7 +41,7 @@ int server(){
   SOCKET listenSocket = INVALID_SOCKET;
   listenSocket = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
   if (listenSocket == INVALID_SOCKET){
-    std::cout << "Error creating listen socket!" << std::endl;
+    std::cout << "Error creating listen socket: " << WSAGetLastError() << std::endl;
     freeaddrinfo(res);
     WSACleanup();
     return 1;
@@ -49,6 +49,17 @@ int server(){
 
   std::cout << "listen socket created" << std::endl;
 
+  iResult = bind(listenSocket, res->ai_addr, (int)res->ai_addrlen);
+  if (iResult == -1){
+    std::cout << "Bind error: " << WSAGetLastError() << std::endl;
+    freeaddrinfo(res);
+    closesocket(listenSocket);
+    WSACleanup();
+    return 1;
+  }
+
+  std::cout << "Bound socket successfully" << std::endl;
+  freeaddrinfo(res);
 
   return 0;
 }
