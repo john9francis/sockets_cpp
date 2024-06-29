@@ -3,23 +3,31 @@ INCLUDE_DIR = include
 
 SOURCES = $(wildcard $(SRC_DIR)/*.cc)
 
-all: gnulinux
+all:
+	@echo please specify 'windows' or 'linux'
 
-linux:
-	zig c++ --target=x86_64-linux main.cc $(SOURCES) -I$(INCLUDE_DIR) -o lin/main
+windows: wserver wclient
 
-windows:
-	zig c++ --target=x86_64-windows main.cc $(SOURCES) -I$(INCLUDE_DIR) -o win/main.exe
+linux: server client
 
-.PHONY: windows linux all gnulinux
+# linux:
+# 	zig c++ --target=x86_64-linux main.cc $(SOURCES) -I$(INCLUDE_DIR) -o lin/main
 
+# windows:
+# 	zig c++ --target=x86_64-windows main.cc $(SOURCES) -I$(INCLUDE_DIR) -o win/main.exe
 
-gnulinux:
-	g++ main.cc $(SOURCES) -I$(INCLUDE_DIR) -o lin/main
-	./lin/main
+.PHONY: windows linux all server client wserver wclient
+
+# ===============================================================
 
 server:
 	g++ server.cc $(SOURCES) -I$(INCLUDE_DIR) -o lin/server
 
 client:
 	g++ client.cc $(SOURCES) -I$(INCLUDE_DIR) -o lin/client
+
+wserver:
+	g++ server.cc $(SOURCES) -I$(INCLUDE_DIR) -o win/server -lws2_32
+
+wclient:
+	g++ client.cc $(SOURCES) -I$(INCLUDE_DIR) -o win/client -lws2_32

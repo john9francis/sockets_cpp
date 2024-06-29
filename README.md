@@ -34,3 +34,4 @@ Then I can edit the code from my linux window or my windows window.
 - [Install zig linux](https://github.com/ziglang/zig/wiki/Install-Zig-from-a-Package-Manager)
 - [Detecting OS from C code](https://iq.opengenus.org/detect-operating-system-in-c/)
 - [Beej's networking tutorial](https://beej.us/guide/bgnet/html/split/system-calls-or-bust.html#getaddrinfoprepare-to-launch)
+- [Getting started with WinSock](https://learn.microsoft.com/en-us/windows/win32/winsock/initializing-winsock)
