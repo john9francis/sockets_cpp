@@ -20,6 +20,14 @@ then go into the devcontainers menu and "attach to running container" and choose
 Then I can edit the code from my linux window or my windows window.
 
 
+# Testing the server with docker
+```
+docker build -t sockets_dev_img .
+docker run -d -p 8080:8080 --name test_server sockets_dev_img
+```
+Then run .\win\client or ./lin/client from local machine, and the linux server will answer!
+
+
 # TODO:
 - [x] Got the server and client sending messages to eachother (on linux so far)
 - [x] Get them sending strings to eachother and decoding them properly
