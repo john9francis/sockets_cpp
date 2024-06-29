@@ -6,8 +6,8 @@
 
 int main(){
   #ifdef _WIN32
-  WindowsSockets::client();
+  return WindowsSockets::client();
   #else
-  LinuxSockets::client();
+  return LinuxSockets::client();
   #endif
 }
