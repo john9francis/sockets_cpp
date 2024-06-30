@@ -5,7 +5,7 @@
 #include <netdb.h>
 #include <string>
 
-#define MYPORT "8080"
+#define MYPORT "8081"
 #define BACKLOG 10
 
 namespace LinuxSockets {

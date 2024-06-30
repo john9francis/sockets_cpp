@@ -18,7 +18,7 @@ int client(){
   memset(&hints, 0, sizeof hints);
   hints.ai_family = AF_UNSPEC;
   hints.ai_socktype = SOCK_STREAM;
-  hints.ai_protocol = IPPROTO_TCP;
+  hints.ai_flags = AI_PASSIVE;
 
   status = getaddrinfo(/*argv[1]*/ NULL, MYPORT, &hints, &res);
   if (status != 0){
