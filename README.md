@@ -27,12 +27,23 @@ docker run -d -p 8080:8080 --name test_server sockets_dev_img
 ```
 Then run .\win\client or ./lin/client from local machine, and the linux server will answer!
 
+# Available ports:
+source: chatGPT
+
+**Well-known Ports (0-1023):** These are reserved for well-known services and protocols (e.g., HTTP on port 80, HTTPS on port 443, FTP on port 21). They require superuser (root) privileges to bind on Unix-like systems.
+
+**Registered Ports (1024-49151):** These are assigned by the Internet Assigned Numbers Authority (IANA) for specific services. However, they can also be used by ordinary user applications.
+
+**Dynamic or Private Ports (49152-65535):** These are not assigned to any specific service and are typically used for client-side communications or ephemeral ports, which are short-lived and used for temporary communications.
 
 # TODO:
 - [x] Got the server and client sending messages to eachother (on linux so far)
 - [x] Get them sending strings to eachother and decoding them properly
-- [ ] Figure out how to un-cache the dockerfile command 'git clone...'
-- [ ] Make my own cross platform header file
+- [x] Figure out how to un-cache the dockerfile command 'git clone...' (my solution is COPY)
+- [x] Make my own cross platform header file
+- [ ] Allow a port to be passed as an argv
+- [ ] Allow port to be checked for availability during runtime
+- [ ] Add more runtime error checking so it's as robust as possible
 - [ ] Implement this server and client for my own use case.
 - [ ] Make video showcasing the differences
 
