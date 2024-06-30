@@ -7,7 +7,7 @@ int client(){
 
   int status;
 
-  status = cp_sockets::init();
+  status = cp_init();
   if (status != 0){
     std::cout << "init failed: " << status << std::endl;
     return 1;
@@ -15,12 +15,7 @@ int client(){
 
   struct addrinfo *res, hints;
 
-  memset(&hints, 0, sizeof hints);
-  hints.ai_family = AF_UNSPEC;
-  hints.ai_socktype = SOCK_STREAM;
-  // hints.ai_flags = AI_PASSIVE; // LINUX
-  // hints.ai_protocol = IPPROTO_TCP; // WINDOWS
-  // CONFIRMED: THE ABOVE MATTER ^^^
+  hints = cp_get_hints();
 
   status = getaddrinfo(/*argv[1]*/ NULL, MYPORT, &hints, &res);
   if (status != 0){
@@ -41,7 +36,7 @@ int client(){
   status = connect(connectSocket, res->ai_addr, res->ai_addrlen);
   if (status == -1){
     std::cout << "Error connecting client to socket" << std::endl;
-    cp_sockets::close(connectSocket);
+    cp_close(connectSocket);
     connectSocket = -1;
   }
 

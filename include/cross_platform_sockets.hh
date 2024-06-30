@@ -26,9 +26,7 @@
 
 #endif
 
-namespace cp_sockets{
-
-int init(){
+int cp_init(){
 
   #ifdef _WIN32
   WSADATA wsaData;
@@ -42,7 +40,23 @@ int init(){
   return 0;
 }
 
-void close(int socket){
+struct addrinfo cp_get_hints(){
+  struct addrinfo hints;
+  memset(&hints, 0, sizeof hints);
+
+  hints.ai_family = AF_UNSPEC;
+  hints.ai_socktype = SOCK_STREAM;
+
+  #ifdef _WIN32
+  hints.ai_protocol = IPPROTO_TCP; // WINDOWS
+  #else
+  hints.ai_flags = AI_PASSIVE; // LINUX
+  #endif
+
+  return hints;
+}
+
+void cp_close(int socket){
   #ifdef _WIN32
   closesocket(socket);
   #else
@@ -59,7 +73,5 @@ void close(int socket){
 // void cleanup(struct addrinfo *res=NULL, int socket, ...){
 
 // }
-
-} // ! namespace cp_sockets
 
 #endif // ! CROSS_PLATFORM_SOCKETS_HH

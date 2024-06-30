@@ -5,18 +5,15 @@ int server(){
   std::cout << "Hello Cross Platform Server" << std::endl;
 
   int status;
-  status = cp_sockets::init();
+  status = cp_init();
   if (status != 0){
     std::cout << "Did not init correctly: " << status << std::endl;
     return 0;
   }
 
   struct addrinfo hints, *res;
-  memset(&hints, 0, sizeof hints);
-
-  hints.ai_family = AF_UNSPEC;
-  hints.ai_socktype = SOCK_STREAM;
-  hints.ai_flags = AI_PASSIVE;
+  
+  hints = cp_get_hints();
 
   status = getaddrinfo(NULL, MYPORT, &hints, &res);
   if (status != 0){
@@ -40,7 +37,7 @@ int server(){
   if (status == -1){
     std::cout << "Bind error, perhaps port already in use." << std::endl;
     freeaddrinfo(res);
-    cp_sockets::close(listenSocket);
+    cp_close(listenSocket);
     return 1;
   }
 
@@ -51,7 +48,7 @@ int server(){
 
   if (listen(listenSocket, 100) == -1){
     std::cout << "Listen error" << std::endl;
-    cp_sockets::close(listenSocket);
+    cp_close(listenSocket);
     return 1;
   }
 
@@ -61,7 +58,7 @@ int server(){
 
   if (clientSocket == -1){
     std::cout << "Accept failed" << std::endl;
-    cp_sockets::close(listenSocket);
+    cp_close(listenSocket);
     return 1; 
   }
 
@@ -96,10 +93,10 @@ int server(){
   // status = shutdown(clientSocket, SD_BOTH);
   // if (status == -1){
   //   std::cout << "Shutdown failed" << std::endl;
-  //   cp_sockets::close(clientSocket);
+  //   cp_close(clientSocket);
   //   return 1;
   // }
 
-  cp_sockets::close(clientSocket);
+  cp_close(clientSocket);
   return 0;
 }
