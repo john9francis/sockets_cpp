@@ -1,13 +1,5 @@
-#ifdef _WIN32
-#include "win_client.hh"
-#else
-#include "lin_client.hh"
-#endif
+#include "cp_client.hh"
 
 int main(){
-  #ifdef _WIN32
-  return WindowsSockets::client();
-  #else
-  return LinuxSockets::client();
-  #endif
+  return client();
 }

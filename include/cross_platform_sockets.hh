@@ -8,8 +8,6 @@
 #ifndef CROSS_PLATFORM_SOCKETS_HH
 #define CROSS_PLATFORM_SOCKETS_HH
 
-namespace cp_sockets{
-
 // include header files
 #ifdef _WIN32
 
@@ -26,6 +24,8 @@ namespace cp_sockets{
 
 #endif
 
+namespace cp_sockets{
+
 int init(){
 
   #ifdef _WIN32
@@ -40,6 +40,18 @@ int init(){
   return 0;
 }
 
+void close(int socket){
+  #ifdef _WIN32
+  closesocket(socket);
+  #else
+  close(socket);
+  #endif
+}
+
+// TODO: IMPLEMENT THE CLEANUP FUNCTION
+//
+//
+//
 // #include <stdarg.h>
 
 // void cleanup(struct addrinfo *res=NULL, int socket, ...){

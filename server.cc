@@ -1,13 +1,5 @@
-#ifdef _WIN32
-#include "win_server.hh"
-#else
-#include "lin_server.hh"
-#endif
+#include "cp_server.hh"
 
 int main(){
-  #ifdef _WIN32
-  return WindowsSockets::server();
-  #else
-  return LinuxSockets::server();
-  #endif
+  return server();
 }
