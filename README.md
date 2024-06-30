@@ -24,37 +24,10 @@ Then I can edit the code from my linux window or my windows window.
 ```
 docker build -t sockets_dev_img .
 docker run -d -p 8080:8080 --name test_server sockets_dev_img
+# note: that is <host port>:<container port>
 ```
 Then run .\win\client or ./lin/client from local machine, and the linux server will answer!
 
-
-# About sockets
-addrinfo struct:
-
-Windows:
-```cpp
-//
-//  Structure used in getaddrinfo() call
-//
-
-typedef struct addrinfo
-{
-    int                 ai_flags;       // AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST
-    int                 ai_family;      // PF_xxx
-    int                 ai_socktype;    // SOCK_xxx
-    int                 ai_protocol;    // 0 or IPPROTO_xxx for IPv4 and IPv6
-    size_t              ai_addrlen;     // Length of ai_addr
-    char *              ai_canonname;   // Canonical name for nodename
-    _Field_size_bytes_(ai_addrlen) struct sockaddr *   ai_addr;        // Binary address
-    struct addrinfo *   ai_next;        // Next structure in linked list
-}
-ADDRINFOA, *PADDRINFOA;
-```
-
-Linux:
-```cpp
-
-```
 
 # TODO:
 - [x] Got the server and client sending messages to eachother (on linux so far)
