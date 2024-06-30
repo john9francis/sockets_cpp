@@ -1,4 +1,7 @@
 # sockets_cpp
+
+6/29/2024 IT WORKS!
+
 A simple communication over the network using sockets in C++. For this project, I will create a server that listens for connections. Then the server can periodically send the client information and the client will send back a message saying if it received the message or not.
 
 # Development Environment
