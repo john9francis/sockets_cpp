@@ -4,6 +4,9 @@
 // 
 // windows uses UINT_PTR instead of int for sockets,
 // however, using an int seems to work.
+//
+// hints are different. windows only works with ai_protocol defined,
+// and linux only works if the client is ai_passive
 
 #ifndef CROSS_PLATFORM_SOCKETS_HH
 #define CROSS_PLATFORM_SOCKETS_HH
@@ -72,7 +75,7 @@ void cp_close(int socket){
 // #include <stdarg.h>
 
 // void cleanup(struct addrinfo *res=NULL, int socket, ...){
-
+//    WSACleanup();
 // }
 
 #endif // ! CROSS_PLATFORM_SOCKETS_HH
