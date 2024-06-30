@@ -7,18 +7,14 @@ This project was developed on a windows machine. The Dockerfile and .devcontaine
 zig version: 0.11.0
 
 # Docker build process:
-Sort of messy way to start up the container:
 ```
-docker rm zig_dev_con 
-docker build -t zig_dev_img .
-docker run -i --name zig_dev_con zig_dev_img
-# control c to end process
-docker start zig_dev_con
+# docker rm sockets_dev_con 
+docker build -t sockets_dev_img .
+docker run -d --name sockets_dev_con sockets_dev_img
 ```
-then go into the devcontainers menu and "attach to running container" and choose zig_dev_con.
+then go into the devcontainers menu and "attach to running container" and choose sockets_dev_con.
 
 Then I can edit the code from my linux window or my windows window.
-
 
 # Testing the server with docker
 ```
