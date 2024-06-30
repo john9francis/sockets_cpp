@@ -8,7 +8,7 @@
 #ifndef CROSS_PLATFORM_SOCKETS_HH
 #define CROSS_PLATFORM_SOCKETS_HH
 
-#define MYPORT "8081"
+#define MYPORT "8080"
 
 // include header files
 #ifdef _WIN32
