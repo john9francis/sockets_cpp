@@ -1,13 +1,14 @@
 // differences:
 //
-// windows has WSAData for error handling
-// (which may be unneccesary..?)
+// windows has WSAStartup to link to the .lib
 // 
-// windows : freeaddrinfo()... may be the same
-//
+// windows uses UINT_PTR instead of int for sockets,
+// however, using an int seems to work.
 
 #ifndef CROSS_PLATFORM_SOCKETS_HH
 #define CROSS_PLATFORM_SOCKETS_HH
+
+namespace cp_sockets{
 
 // include header files
 #ifdef _WIN32
@@ -24,5 +25,27 @@
 #include <netdb.h>
 
 #endif
+
+int init(){
+
+  #ifdef _WIN32
+  WSADATA wsaData;
+
+  int iResult = WSAStartup(MAKEWORD(2,2), &wsaData);
+  if (iResult != 0){
+    return 1;
+  }
+  #endif
+
+  return 0;
+}
+
+// #include <stdarg.h>
+
+// void cleanup(struct addrinfo *res=NULL, int socket, ...){
+
+// }
+
+} // ! namespace cp_sockets
 
 #endif // ! CROSS_PLATFORM_SOCKETS_HH
