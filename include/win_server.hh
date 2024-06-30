@@ -38,9 +38,9 @@ int server(){
 
   std::cout << "get addr info succeeded" << std::endl;
 
-  SOCKET listenSocket = INVALID_SOCKET;
+  int listenSocket = -1;
   listenSocket = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
-  if (listenSocket == INVALID_SOCKET){
+  if (listenSocket == -1){
     std::cout << "Error creating listen socket: " << WSAGetLastError() << std::endl;
     freeaddrinfo(res);
     WSACleanup();
@@ -72,11 +72,11 @@ int server(){
 
   listen(listenSocket, 100);
 
-  SOCKET clientSocket = INVALID_SOCKET;
+  int clientSocket = -1;
 
   clientSocket = accept(listenSocket, NULL, NULL);
 
-  if (clientSocket == INVALID_SOCKET){
+  if (clientSocket == -1){
     std::cout << "Accept failed: " << WSAGetLastError() << std::endl;
     closesocket(listenSocket);
     WSACleanup();
@@ -112,7 +112,7 @@ int server(){
 
   //  shut down:
   iResult = shutdown(clientSocket, SD_BOTH);
-  if (iResult == SOCKET_ERROR){
+  if (iResult == -1){
     std::cout << "Shutdown failed" << WSAGetLastError() << std::endl;
     closesocket(clientSocket);
     WSACleanup();
