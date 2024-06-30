@@ -38,6 +38,13 @@ int server(){
     std::cerr << "Could not initialize socket." << std::endl;
     exit(1);
   }
+
+  // allow to reuse ports:
+  int opt = 1;
+  if (setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0) {
+    perror("setsockopt");
+    return 1;
+  }
   
   if ((status = bind(serverSocket, res->ai_addr, res->ai_addrlen)) != 0){
     std::cerr << "Could not bind socket: " << status << std::endl;
