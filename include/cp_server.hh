@@ -11,8 +11,6 @@ int server(){
     return 0;
   }
 
-  #define MYPORT "8080"
-
   struct addrinfo hints, *res;
   memset(&hints, 0, sizeof hints);
 
@@ -41,7 +39,7 @@ int server(){
 
   status = bind(listenSocket, res->ai_addr, (int)res->ai_addrlen);
   if (status == -1){
-    std::cout << "Bind error" << std::endl;
+    std::cout << "Bind error, perhaps port already in use." << std::endl;
     freeaddrinfo(res);
     cp_sockets::close(listenSocket);
     return 1;

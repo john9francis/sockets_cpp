@@ -20,8 +20,6 @@ int client(){
   hints.ai_socktype = SOCK_STREAM;
   hints.ai_protocol = IPPROTO_TCP;
 
-  #define MYPORT "8080"
-
   status = getaddrinfo(/*argv[1]*/ NULL, MYPORT, &hints, &res);
   if (status != 0){
     std::cout << "getaddrinfo failed: " << status << std::endl;
@@ -38,8 +36,9 @@ int client(){
     return 1;
   }
 
-  status = connect(connectSocket, res->ai_addr, (int)res->ai_addrlen);
+  status = connect(connectSocket, res->ai_addr, res->ai_addrlen);
   if (status == -1){
+    std::cout << "Error connecting client to socket" << std::endl;
     cp_sockets::close(connectSocket);
     connectSocket = -1;
   }
