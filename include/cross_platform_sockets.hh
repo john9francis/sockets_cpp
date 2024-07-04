@@ -68,6 +68,15 @@ void cp_close(int socket){
   #endif
 }
 
+int cp_get_last_error(){
+  int err = 0;
+  #ifdef _WIN32
+  err = WSAGetLastError();
+  #endif
+
+  return err;
+}
+
 // TODO: IMPLEMENT THE CLEANUP FUNCTION
 //
 //
