@@ -39,15 +39,17 @@ int client(){
 
   std::cout << "HOST: " << hostname << " SERVER: " << servername << std::endl;
 
-  return 2; // BREAK HERE FOR NOW
+  // return 2; // BREAK HERE FOR NOW
 
   status = -1;
-  while (status == -1){
+  int counter = 0;
+  while (status == -1 && counter < 10){
     status = connect(connectSocket, res->ai_addr, res->ai_addrlen);
     if (status == -1){
       std::cout << "Error connecting client to socket: " << cp_get_last_error() << std::endl;
       cp_close(connectSocket);
       connectSocket = -1;
+      counter ++;
     }
   }
 
