@@ -23,7 +23,7 @@ int client(){
     return 1;
   }
 
-  SOCKET connectSocket = -1; // note: need to typedef cp_socket
+  int connectSocket = -1; // note: need to typedef cp_socket
 
   connectSocket = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
 
