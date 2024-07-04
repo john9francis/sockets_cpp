@@ -47,3 +47,4 @@ Then run .\win\client or ./lin/client from local machine, and the linux server w
 - [Detecting OS from C code](https://iq.opengenus.org/detect-operating-system-in-c/)
 - [Beej's networking tutorial](https://beej.us/guide/bgnet/html/split/system-calls-or-bust.html#getaddrinfoprepare-to-launch)
 - [Getting started with WinSock](https://learn.microsoft.com/en-us/windows/win32/winsock/initializing-winsock)
+- [getaddrinfo documentation](https://pubs.opengroup.org/onlinepubs/9699919799/functions/getaddrinfo.html)
