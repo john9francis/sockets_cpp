@@ -11,7 +11,7 @@ int server(){
     return 0;
   }
 
-  struct addrinfo hints, *res;
+  struct addrinfo hints, *res, *rp;
   
   hints = cp_get_hints();
 
@@ -24,25 +24,31 @@ int server(){
   std::cout << "get addr info succeeded" << std::endl;
 
   int listenSocket = -1;
-  listenSocket = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
+  for (rp=res; rp != NULL; rp = rp->ai_next){
+    listenSocket = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
+
+    if (listenSocket == -1) continue;
+
+    if (bind(listenSocket, rp->ai_addr, rp->ai_addrlen) == 0) break;
+
+    cp_close(listenSocket);
+  }
+
+  std::cout << "Bound socket successfully" << std::endl;
+
+  freeaddrinfo(res);
+
+  if (rp == NULL){
+    std::cout << "Could not bind" << std::endl;
+    return 1;
+  }
+
   if (listenSocket == -1){
     std::cout << "Error creating listen socket: " << std::endl;
-    freeaddrinfo(res);
     return 1;
   }
 
   std::cout << "listen socket created" << std::endl;
-
-  status = bind(listenSocket, res->ai_addr, (int)res->ai_addrlen);
-  if (status == -1){
-    std::cout << "Bind error, perhaps port already in use." << std::endl;
-    freeaddrinfo(res);
-    cp_close(listenSocket);
-    return 1;
-  }
-
-  std::cout << "Bound socket successfully" << std::endl;
-  freeaddrinfo(res);
 
   std::cout << "Listening..." << std::endl;
 
