@@ -15,7 +15,7 @@ int server(){
   
   hints = cp_get_hints();
 
-  status = getaddrinfo(0, MYPORT, &hints, &res);
+  status = getaddrinfo("test_server", MYPORT, &hints, &res);
   if (status != 0){
     std::cout << "get addr info failed: " << status << std::endl;
     return 1;
