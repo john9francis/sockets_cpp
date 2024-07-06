@@ -12,7 +12,7 @@ zig version: 0.11.0
 # Docker build process:
 ```
 # docker rm sockets_dev_con 
-docker build -t sockets_dev_img .
+docker build -f Dockerfile.dev -t sockets_dev_img .
 docker run -d --name sockets_dev_con sockets_dev_img
 ```
 then go into the devcontainers menu and "attach to running container" and choose sockets_dev_con.
@@ -21,8 +21,10 @@ Then I can edit the code from my linux window or my windows window.
 
 # Testing the server with docker
 ```
-docker build -t sockets_dev_img .
+docker build -f Dockerfile.test -t sockets_dev_img .
 docker run -d -p 8080:8080 --name test_server sockets_dev_img
+# optionally: delete the container after it finishes:
+# docker run --rm -d -p 8080:8080 --name test_server sockets_dev_img
 # note: that is <host port>:<container port>
 ```
 Then run .\win\client or ./lin/client from local machine, and the linux server will answer!
