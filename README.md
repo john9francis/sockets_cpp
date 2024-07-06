@@ -22,10 +22,12 @@ Then I can edit the code from my linux window or my windows window.
 # Testing the server with docker
 ```
 docker build -f Dockerfile.test -t sockets_dev_img .
-docker run -d -p 8080:8080 --name test_server --network bridge sockets_dev_img
+docker run -d -p 8080:8080 --name test_server sockets_dev_img
 # optionally: delete the container after it finishes:
 # docker run --rm -d -p 8080:8080 --name test_server sockets_dev_img
 # note: that is <host port>:<container port>
+# note for me: look into "--network bridge"
+# note for me: use -itd in the docker containers to keep them on standby
 ```
 Then run .\win\client or ./lin/client from local machine, and the linux server will answer!
 
