@@ -15,7 +15,7 @@ int server(){
   
   hints = cp_get_hints();
 
-  status = getaddrinfo("test_server", MYPORT, &hints, &res);
+  status = getaddrinfo(0, "8080", &hints, &res); // hardcoded
   if (status != 0){
     std::cout << "get addr info failed: " << status << std::endl;
     return 1;
@@ -39,7 +39,7 @@ int server(){
   
   char hostname[100];
   char portname[100];
-  getnameinfo(res->ai_addr, res->ai_addrlen, hostname, sizeof hostname, portname, sizeof portname, NI_NOFQDN | NI_NUMERICSERV);
+  getnameinfo(res->ai_addr, res->ai_addrlen, hostname, sizeof hostname, portname, sizeof portname, NI_NUMERICHOST | NI_NUMERICSERV);
 
   std::cout << "HOST: " << hostname << " PORT: " << portname << std::endl;
 

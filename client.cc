@@ -1,5 +1,5 @@
 #include "cp_client.hh"
 
-int main(){
-  return client();
+int main(int argc, char *argv[]){
+  return client(argc, argv);
 }

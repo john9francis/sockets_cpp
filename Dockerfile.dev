@@ -11,7 +11,3 @@ WORKDIR /home/sockets_cpp/
 COPY . /home/sockets_cpp/
 
 RUN make linux
-
-# displays the file /dev/null in realtime, aka
-# just puts the docker container in idle
-CMD ["tail", "-f", "/dev/null"]

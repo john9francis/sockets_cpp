@@ -2,8 +2,12 @@
 #include <iostream>
 
 
-int client(){
+int client(int argc, char *argv[]){
   std::cout << "Hello Cross Platform Client" << std::endl;
+  if (argc < 3){
+    std::cout << "Please specify the server's ip and the port, aka: ./client 1.2.3 8080" << std::endl;
+    return 1;
+  }
 
   int status;
 
@@ -17,7 +21,7 @@ int client(){
 
   hints = cp_get_hints();
 
-  status = getaddrinfo("test_server", MYPORT, &hints, &res);
+  status = getaddrinfo(argv[1], argv[2], &hints, &res);
   if (status != 0){
     std::cout << "getaddrinfo failed: " << status << std::endl;
     return 1;
@@ -35,7 +39,7 @@ int client(){
 
   char hostname[100];
   char portname[100];
-  getnameinfo(res->ai_addr, res->ai_addrlen, hostname, sizeof hostname, portname, sizeof portname, NI_NOFQDN | NI_NUMERICSERV);
+  getnameinfo(res->ai_addr, res->ai_addrlen, hostname, sizeof hostname, portname, sizeof portname, NI_NUMERICHOST | NI_NUMERICSERV);
 
   std::cout << "HOST: " << hostname << " PORT: " << portname << std::endl;
 
