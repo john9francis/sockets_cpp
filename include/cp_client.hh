@@ -17,7 +17,7 @@ int client(){
 
   hints = cp_get_hints();
 
-  status = getaddrinfo(/*argv[1]*/ NULL, MYPORT, &hints, &res);
+  status = getaddrinfo(0, MYPORT, &hints, &res);
   if (status != 0){
     std::cout << "getaddrinfo failed: " << status << std::endl;
     return 1;
