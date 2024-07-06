@@ -39,7 +39,7 @@ int server(){
   
   char hostname[100];
   char portname[100];
-  getnameinfo(res->ai_addr, res->ai_addrlen, hostname, sizeof hostname, portname, sizeof portname, NI_NUMERICHOST | NI_NUMERICSERV);
+  getnameinfo(res->ai_addr, res->ai_addrlen, hostname, sizeof hostname, portname, sizeof portname, NI_NOFQDN | NI_NUMERICSERV);
 
   std::cout << "HOST: " << hostname << " PORT: " << portname << std::endl;
 
