@@ -33,10 +33,13 @@ Then run .\win\client or ./lin/client from local machine, and the linux server w
 # TODO:
 - [x] Got the server and client sending messages to eachother (on linux so far)
 - [x] Get them sending strings to eachother and decoding them properly
-- [ ] Figure out how to un-cache the dockerfile command 'git clone...'
-- [ ] Make my own cross platform header file
+- [x] Figure out how to un-cache the dockerfile command 'git clone...'
+- [x] Make my own cross platform header file
 - [ ] Implement this server and client for my own use case.
 - [ ] Make video showcasing the differences
+
+# Issues:
+- [ ] 7/6 windows by default hooks up to hostname: "::1" and linux hooks up to "0.0.0.0". That's why they can't connect together (I think)
 
 # Dependencies
 1. [Zig](https://ziglang.org/) (for cross compilation)
