@@ -1,0 +1,15 @@
+FROM ubuntu:latest
+
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    make \
+    git
+
+WORKDIR /home/sockets_cpp/
+
+COPY . /home/sockets_cpp/
+
+RUN make linux
+
+CMD [ "./lin/server" ]

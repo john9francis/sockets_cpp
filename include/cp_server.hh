@@ -36,6 +36,13 @@ int server(){
 
   std::cout << "Bound socket successfully" << std::endl;
 
+  
+  char hostname[100];
+  char portname[100];
+  getnameinfo(res->ai_addr, res->ai_addrlen, hostname, sizeof hostname, portname, sizeof portname, NI_NUMERICHOST | NI_NUMERICSERV);
+
+  std::cout << "HOST: " << hostname << " PORT: " << portname << std::endl;
+
   freeaddrinfo(res);
 
   if (rp == NULL){

@@ -7,6 +7,9 @@
 //
 // hints are different. windows only works with ai_protocol defined,
 // and linux only works if the client is ai_passive
+//
+// TODO: freeaddrinfo and getnameinfo are not on windows!
+//
 
 #ifndef CROSS_PLATFORM_SOCKETS_HH
 #define CROSS_PLATFORM_SOCKETS_HH
@@ -66,6 +69,15 @@ void cp_close(int socket){
   #else
   close(socket);
   #endif
+}
+
+int cp_get_last_error(){
+  int err = 0;
+  #ifdef _WIN32
+  err = WSAGetLastError();
+  #endif
+
+  return err;
 }
 
 // TODO: IMPLEMENT THE CLEANUP FUNCTION

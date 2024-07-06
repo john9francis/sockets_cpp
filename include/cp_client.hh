@@ -23,7 +23,7 @@ int client(){
     return 1;
   }
 
-  int connectSocket = -1;
+  int connectSocket = -1; // note: need to typedef cp_socket
 
   connectSocket = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
 
@@ -33,11 +33,22 @@ int client(){
     return 1;
   }
 
-  status = connect(connectSocket, res->ai_addr, res->ai_addrlen);
-  if (status == -1){
-    std::cout << "Error connecting client to socket" << std::endl;
-    cp_close(connectSocket);
-    connectSocket = -1;
+  char hostname[100];
+  char portname[100];
+  getnameinfo(res->ai_addr, res->ai_addrlen, hostname, sizeof hostname, portname, sizeof portname, NI_NUMERICHOST | NI_NUMERICSERV);
+
+  std::cout << "HOST: " << hostname << " PORT: " << portname << std::endl;
+
+  status = -1;
+  int counter = 0;
+  while (status == -1 && counter < 10){
+    status = connect(connectSocket, res->ai_addr, res->ai_addrlen);
+    if (status == -1){
+      std::cout << "Error connecting client to socket: " << cp_get_last_error() << std::endl;
+      cp_close(connectSocket);
+      connectSocket = -1;
+      counter ++;
+    }
   }
 
   // from winsock tutorial:
