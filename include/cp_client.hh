@@ -34,12 +34,10 @@ int client(){
   }
 
   char hostname[100];
-  char servername[100];
-  getnameinfo(res->ai_addr, res->ai_addrlen, hostname, sizeof hostname, servername, sizeof servername, NI_NUMERICHOST | NI_NUMERICSERV);
+  char portname[100];
+  getnameinfo(res->ai_addr, res->ai_addrlen, hostname, sizeof hostname, portname, sizeof portname, NI_NUMERICHOST | NI_NUMERICSERV);
 
-  std::cout << "HOST: " << hostname << " SERVER: " << servername << std::endl;
-
-  // return 2; // BREAK HERE FOR NOW
+  std::cout << "HOST: " << hostname << " PORT: " << portname << std::endl;
 
   status = -1;
   int counter = 0;
