@@ -23,14 +23,10 @@ Then I can edit the code from my linux window or my windows window.
 ```
 docker build -f Dockerfile.test -t sockets_dev_img .
 docker run --rm -p 8080:8080 --name test_server sockets_dev_img
-# optionally: delete the container after it finishes:
-# docker run --rm -d -p 8080:8080 --name test_server sockets_dev_img
 # note: that is <host port>:<container port>
-# note for me: look into "--network bridge"
 # note for me: use -itd in the docker containers to keep them on standby
-# docker run -p 127.0.0.1:8080:8080 -p '[::1]:8080:8080' --name test_server sockets_dev_img
 ```
-Then run .\win\client or ./lin/client from local machine, and the linux server will answer!
+Then run .\win\client localhost 8080 or (UNTESTED)./lin/client localhost 8080 from local machine, and the linux server will answer!
 
 
 # TODO:
