@@ -6,6 +6,9 @@
 class Client {
 public:
   Client(char* host, char* port);
+
+private:
+  int Init();
 };
 
 

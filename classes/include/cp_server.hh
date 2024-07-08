@@ -2,13 +2,14 @@
 #define CP_SERVER_HH
 
 #include <iostream>
+#include "cross_platform_sockets.hh"
 
 class Server {
 public:
   Server();
 
 private:
-  void Init(){};
+  int Init();
   void AcceptConnections(){};
 };
 

@@ -8,3 +8,7 @@ Client::Client(char* host, char* port){
   << port 
   << std::endl;
 }
+
+int Client::Init(){
+  return 0;
+}
