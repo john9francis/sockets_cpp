@@ -5,7 +5,7 @@
 
 class Client {
 public:
-  Client();
+  Client(char* host, char* port);
 };
 
 
