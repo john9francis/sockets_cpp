@@ -59,6 +59,26 @@ int Server::Init(){
   }
 
   std::cout << "listen socket created" << std::endl;
+  
+  std::cout << "Listening..." << std::endl;
+
+  if (listen(listenSocket, 100) == -1){
+    std::cout << "Listen error" << std::endl;
+    cp_close(listenSocket);
+    return 1;
+  }
+
+  int clientSocket = -1;
+
+  clientSocket = accept(listenSocket, NULL, NULL);
+
+  if (clientSocket == -1){
+    std::cout << "Accept failed" << std::endl;
+    cp_close(listenSocket);
+    return 1; 
+  }
+
+  std::cout << "client connected" << std::endl;
 
   return 0;
 }
