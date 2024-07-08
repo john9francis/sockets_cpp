@@ -17,10 +17,14 @@ private:
   void AcceptConnections();
   void SendMessages();
 
+  void Stop(){ running = false; }
+
   std::list<int> sockets;
 
   std::thread listenThread;
   std::thread sendDataThread;
+
+  bool running = true;
 };
 
 #endif // ! CP_SERVER_HH

@@ -3,8 +3,9 @@
 Server::Server(){
   std::cout << "Hello Server" << std::endl;
 
-  Init();
+  Init(); // stops main function execution
 
+  // runs concurrently with the rest of the main function
   listenThread = std::thread(&Server::AcceptConnections, this);
   sendDataThread = std::thread(&Server::SendMessages, this);
 
