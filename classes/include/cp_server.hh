@@ -4,13 +4,19 @@
 #include <iostream>
 #include "cross_platform_sockets.hh"
 
+#include <list>
+#include <thread>
+
 class Server {
 public:
   Server();
 
 private:
   int Init();
-  void AcceptConnections(){};
+  void AcceptConnections();
+  void SendMessages();
+
+  std::list<int> sockets;
 };
 
 #endif // ! CP_SERVER_HH

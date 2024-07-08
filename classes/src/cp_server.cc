@@ -2,7 +2,30 @@
 
 Server::Server(){
   std::cout << "Hello Server" << std::endl;
+
   Init();
+
+  std::thread listenThread(&Server::AcceptConnections, this);
+  std::thread sendDataThread(&Server::SendMessages, this);
+
+  listenThread.join();
+  sendDataThread.join();
+}
+
+void Server::AcceptConnections(){
+  int counter = 0;
+  while (counter < 10){
+    std::cout << "Accepting Connections..." << std::endl;
+    counter ++;
+  }
+}
+
+void Server::SendMessages(){
+  int counter = 0;
+  while (counter < 10){
+    std::cout << "Sending Messages..." << std::endl;
+    counter ++;
+  }
 }
 
 int Server::Init(){
