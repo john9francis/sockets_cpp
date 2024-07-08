@@ -12,25 +12,22 @@ Server::Server(){
 }
 
 Server::~Server(){
+  Stop();
   listenThread.join();
   sendDataThread.join();
 }
 
 void Server::AcceptConnections(){
-  int counter = 0;
-  while (counter < 10){
+  while (running){
     std::cout << "Accepting Connections..." << std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    counter ++;
   }
 }
 
 void Server::SendMessages(){
-  int counter = 0;
-  while (counter < 10){
+  while (running){
     std::cout << "Sending Messages..." << std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
-    counter ++;
   }
 }
 
