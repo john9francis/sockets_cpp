@@ -57,5 +57,28 @@ int Client::Init(char* host, char* port){
       counter ++;
     }
   }
+
+  char response[1024];
+
+  int bytesReceived = -1;
+  
+  while (bytesReceived <= 0){
+    bytesReceived = recv(connectSocket, response, sizeof(response), 0);
+  }
+
+  std::cout << "From server: " << response << std::endl;
+
+  // send a message over
+  std::string strmsg = "Client says hi!";
+  const char* msg = strmsg.c_str();
+  int len, bytes_sent;
+
+  len = strlen(msg);
+  bytes_sent = send(connectSocket, "Hi from client", len, 0);
+
+  if (bytes_sent != len){
+    std::cout << "The whole message wasn't quite sent!" << std::endl;
+  }
+
   return 0;
 }

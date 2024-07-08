@@ -79,6 +79,42 @@ int Server::Init(){
   }
 
   std::cout << "client connected" << std::endl;
+  
+  // send a message over
+  std::string strmsg = "Server says Hey!";
+  const char* msg = strmsg.c_str();
+  int len, bytes_sent;
+
+  len = strlen(msg);
+  bytes_sent = send(clientSocket, "Hey from server", len, 0);
+
+  if (bytes_sent != len){
+    std::cout << "The whole message wasn't quite sent!" << std::endl;
+  }
+  else {
+    std::cout << "Sent message" << std::endl;
+  }
+
+  char response[1024] = {0};
+
+  int bytes_recieved = -1;
+
+  while (bytes_recieved <= 0){
+    bytes_recieved = recv(clientSocket, response, sizeof(response), 0);
+  }
+
+  std::cout << response << std::endl;
+
+  //  shut down:
+  // status = shutdown(clientSocket, SD_BOTH);
+  // if (status == -1){
+  //   std::cout << "Shutdown failed" << std::endl;
+  //   cp_close(clientSocket);
+  //   return 1;
+  // }
+
+  cp_close(clientSocket);
+  return 0;
 
   return 0;
 }
