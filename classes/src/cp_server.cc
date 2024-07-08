@@ -19,15 +19,64 @@ Server::~Server(){
 
 void Server::AcceptConnections(){
   while (running){
-    std::cout << "Accepting Connections..." << std::endl;
-    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    
+    int clientSocket = -1;
+    clientSocket = accept(listenSocket, NULL, NULL);
+
+    if (clientSocket == -1){
+      std::cout << "Accept failed" << std::endl;
+    }
+
+    std::cout << "client connected" << std::endl;
+
+    newSockets.push_back(clientSocket);
   }
 }
 
 void Server::SendMessages(){
   while (running){
-    std::cout << "Sending Messages..." << std::endl;
-    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    
+    if (newSockets.size() == 0) continue;
+
+    int clientSocket = newSockets.front();
+
+    // send a message over
+    std::string strmsg = "Server says Hey!";
+    const char* msg = strmsg.c_str();
+    int len, bytes_sent;
+
+    len = strlen(msg);
+    bytes_sent = send(clientSocket, "Hey from server", len, 0);
+
+    if (bytes_sent != len){
+      std::cout << "The whole message wasn't quite sent!" << std::endl;
+    }
+    else {
+      std::cout << "Sent message" << std::endl;
+    }
+
+    char response[1024] = {0};
+
+    int bytes_recieved = -1;
+
+    while (bytes_recieved <= 0){
+      bytes_recieved = recv(clientSocket, response, sizeof(response), 0);
+    }
+
+    std::cout << "From socket " << clientSocket << ": " << response << std::endl;
+
+    newSockets.pop_front();
+    sockets.push_back(clientSocket);
+
+    //  shut down:
+    // status = shutdown(clientSocket, SD_BOTH);
+    // if (status == -1){
+    //   std::cout << "Shutdown failed" << std::endl;
+    //   cp_close(clientSocket);
+    //   return 1;
+    // }
+
+    // cp_close(clientSocket);
   }
 }
 
@@ -52,7 +101,7 @@ int Server::Init(){
 
   std::cout << "get addr info succeeded" << std::endl;
 
-  int listenSocket = -1;
+  listenSocket = -1;
   for (rp=res; rp != NULL; rp = rp->ai_next){
     listenSocket = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
 
@@ -93,54 +142,6 @@ int Server::Init(){
     cp_close(listenSocket);
     return 1;
   }
-
-  int clientSocket = -1;
-
-  clientSocket = accept(listenSocket, NULL, NULL);
-
-  if (clientSocket == -1){
-    std::cout << "Accept failed" << std::endl;
-    cp_close(listenSocket);
-    return 1; 
-  }
-
-  std::cout << "client connected" << std::endl;
-  
-  // send a message over
-  std::string strmsg = "Server says Hey!";
-  const char* msg = strmsg.c_str();
-  int len, bytes_sent;
-
-  len = strlen(msg);
-  bytes_sent = send(clientSocket, "Hey from server", len, 0);
-
-  if (bytes_sent != len){
-    std::cout << "The whole message wasn't quite sent!" << std::endl;
-  }
-  else {
-    std::cout << "Sent message" << std::endl;
-  }
-
-  char response[1024] = {0};
-
-  int bytes_recieved = -1;
-
-  while (bytes_recieved <= 0){
-    bytes_recieved = recv(clientSocket, response, sizeof(response), 0);
-  }
-
-  std::cout << response << std::endl;
-
-  //  shut down:
-  // status = shutdown(clientSocket, SD_BOTH);
-  // if (status == -1){
-  //   std::cout << "Shutdown failed" << std::endl;
-  //   cp_close(clientSocket);
-  //   return 1;
-  // }
-
-  cp_close(clientSocket);
-  return 0;
 
   return 0;
 }

@@ -19,6 +19,9 @@ private:
 
   void Stop(){ running = false; }
 
+  int listenSocket;
+
+  std::list<int> newSockets;
   std::list<int> sockets;
 
   std::thread listenThread;
