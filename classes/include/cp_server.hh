@@ -18,6 +18,9 @@ private:
   void SendMessages();
 
   std::list<int> sockets;
+
+  std::thread listenThread;
+  std::thread sendDataThread;
 };
 
 #endif // ! CP_SERVER_HH

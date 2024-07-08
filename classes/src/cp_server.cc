@@ -5,15 +5,14 @@ Server::Server(){
 
   Init();
 
-  std::thread listenThread(&Server::AcceptConnections, this);
-  std::thread sendDataThread(&Server::SendMessages, this);
+  listenThread = std::thread(&Server::AcceptConnections, this);
+  sendDataThread = std::thread(&Server::SendMessages, this);
 
-  listenThread.join();
-  sendDataThread.join();
 }
 
 Server::~Server(){
-  
+  listenThread.join();
+  sendDataThread.join();
 }
 
 void Server::AcceptConnections(){
